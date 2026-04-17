@@ -1,0 +1,19 @@
+.products {
+  padding: 16px;
+
+  &__section {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+}

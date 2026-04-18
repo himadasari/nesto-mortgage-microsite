@@ -10,7 +10,7 @@ export default function ProductsPage() {
     const { mutate, isPending } = useCreateApplication();
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Something went wrong</div>;
+  if (isError) return <div>Something went wrong!</div>;
 
   const { variable, fixed } = getBestProducts(data || []);
   const handleSelect = (productId: number) => {
@@ -22,7 +22,7 @@ export default function ProductsPage() {
     };
 
   return <div>
-        <div>Products Page</div>
+        <h3>Products Page</h3>
         {!data ||data.length === 0 ? (
             <div>No products available</div>
     ) : (

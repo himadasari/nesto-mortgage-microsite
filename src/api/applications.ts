@@ -8,6 +8,9 @@ export const createApplication = (productId: number) => {
   });
 };
 
+export const getApplications = (): Promise<Application[]> =>
+  request<Application[]>("/applications");
+
 export const getApplication = (id: string) =>
   request<Application>(`/applications/${id}`);
 

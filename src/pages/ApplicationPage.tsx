@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { ApplicationForm } from '../components/ApplicationForm';
 import { useProducts } from '../hooks/useProducts';
 import { useMemo } from 'react';
+import { showError, showInfo, showSuccess } from '../utils/toast';
+import { isApplicantComplete } from '../utils/utils';
 
 const ProductSection = ({
   product,
@@ -38,12 +40,26 @@ export const ApplicationPage = () => {
   const { data: products, isLoading: isProductLoading, isError: isProductError } = useProducts();
 
   const handleSubmit = (applicant: Applicant) => {
-    updateMutation.mutate({
-      id: id!,
-      data: {
-        applicants: [applicant],
-      },
-    });
+    updateMutation.mutate(
+        {
+            id: id!,
+            data: {
+                applicants: [applicant],
+            },
+        },
+        {
+            onSuccess: () => {
+                if (isApplicantComplete(applicant)) {
+                showSuccess("Application Saved");
+                } else {
+                showInfo("Application saved with incomplete details.");
+                }
+            },
+            onError: () => {
+                showError("Failed to save application");
+            },
+        }
+    );
   };
 
     const product = useMemo(() => products?.find((p) => p.id === data?.productId), [products, data?.productId]);

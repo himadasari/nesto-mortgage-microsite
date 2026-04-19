@@ -46,6 +46,7 @@ export type Application = {
   type: "NEW" | "RENEWAL" | "REFINANCE";
   applicants: Applicant[];
   productId?: number;
+  status: "draft" | "complete";
   readonly createdAt: string;
 };
 

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 import { useCreateApplication } from "../../hooks/useCreateApplication";
 import { useProducts } from "../../hooks/useProducts";
-import { getBestProducts } from "../../utils";
+import { getBestProducts } from "../../utils/utils";
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useProducts();

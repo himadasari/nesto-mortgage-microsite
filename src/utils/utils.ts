@@ -1,4 +1,4 @@
-import type { Product } from "./types";
+import type { Applicant, Product } from "../types";
 
 export const getBestProducts = (products: Product[]) => {
   const variable = products.filter(p => p.type === "VARIABLE");
@@ -16,3 +16,9 @@ export const getBestProducts = (products: Product[]) => {
     fixed: getLowest(fixed),
   };
 }
+
+export const isApplicantComplete = (a: Applicant): boolean => {
+  return [a.firstName, a.lastName, a.email, a.phone].every(
+    (f) => f?.trim()
+  );
+};

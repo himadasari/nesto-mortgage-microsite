@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Applicant } from "../types";
 
-export const ApplicationForm = ({
+const ApplicationForm = ({
   initialData,
   onSubmit,
   isLoading,
@@ -62,3 +62,5 @@ export const ApplicationForm = ({
     </form>
   );
 };
+
+export default ApplicationForm;

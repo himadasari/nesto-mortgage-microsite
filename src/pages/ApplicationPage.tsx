@@ -1,9 +1,9 @@
-import { ProductCard } from '../components/ProductCard/ProductCard';
+import ProductCard from '../components/ProductCard';
 import type { Product, Applicant } from '../types';
 import { useApplication } from '../hooks/useApplication';
 import { useUpdateApplication } from '../hooks/useUpdateApplication';
 import { useParams } from 'react-router-dom';
-import { ApplicationForm } from '../components/ApplicationForm';
+import ApplicationForm from '../components/ApplicationForm';
 import { useProducts } from '../hooks/useProducts';
 import { useMemo } from 'react';
 import { showError, showInfo, showSuccess } from '../utils/toast';
@@ -73,7 +73,7 @@ export const ApplicationPage = () => {
   if (!data) return <div>Application not found</div>;
 
     return (<>
-        <h3>Application Details</h3>
+       <h1 className="page-header">Application Details</h1>
         <div className="application-page">
             <ProductSection product={product} isLoading={isProductLoading} isError={isProductError}/>
             <div className="vertical-separator" />

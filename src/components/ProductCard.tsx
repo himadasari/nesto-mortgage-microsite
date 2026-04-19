@@ -1,11 +1,11 @@
-import type { Product } from '../../types';
+import type { Product } from '../types';
 
 interface ProductCardProps {
     product: Product;
     onClick?: () => void;
 }
 
-export const ProductCard = ({ product, onClick } : ProductCardProps ) => {
+const ProductCard = ({ product, onClick } : ProductCardProps ) => {
     return (
         <div
             onClick={onClick}
@@ -24,3 +24,5 @@ export const ProductCard = ({ product, onClick } : ProductCardProps ) => {
         </div>
     );
 };
+
+export default ProductCard;

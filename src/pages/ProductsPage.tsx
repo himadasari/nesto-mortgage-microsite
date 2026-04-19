@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ProductCard } from "../../components/ProductCard/ProductCard";
-import { useCreateApplication } from "../../hooks/useCreateApplication";
-import { useProducts } from "../../hooks/useProducts";
-import { getBestProducts } from "../../utils/utils";
+import ProductCard from "../components/ProductCard";
+import { useCreateApplication } from "../hooks/useCreateApplication";
+import { useProducts } from "../hooks/useProducts";
+import { getBestProducts } from "../utils/utils";
 
 export default function ProductsPage() {
   const { data, isLoading, isError } = useProducts();
@@ -21,9 +21,9 @@ export default function ProductsPage() {
     });
     };
 
-  return <div>
-        <h3>Products Page</h3>
-        {!data ||data.length === 0 ? (
+  return <div className="products-page">
+    <h1 className="page-header">Mortgage Products</h1>
+    {!data ||data.length === 0 ? (
             <div>No products available</div>
     ) : (
         <div className="products">

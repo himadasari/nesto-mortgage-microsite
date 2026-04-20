@@ -22,14 +22,14 @@ const ProductSection = ({
   isError: boolean;
 }) => {
   if (isLoading) {
-    return <div>Loading product...</div>;
+    return <PageState message="Loading product..." />;
   }
   if (isError) {
-    return <div>Failed to load product</div>;
+    return <PageState message="Failed to load product" type="error" />;
   }
 
   if (!product) {
-    return <div>Product not available</div>;
+    return <PageState message="Product not available" />;
   }
 
   return <ProductCard product={product} />;
@@ -104,17 +104,21 @@ export const ApplicationPage = () => {
           <PageState message="Failed to load application" type="error" />
         )}
         {!data && <PageState message="Application not found" />}
-        <ProductSection
-          product={product}
-          isLoading={isProductLoading}
-          isError={isProductError}
-        />
-        <div className="vertical-separator" />
-        <ApplicationForm
-          initialData={data.applicants?.[0]}
-          onSubmit={handleSubmit}
-          isLoading={updateMutation.isPending}
-        />
+        {!isLoading && !isError && data && (
+          <>
+            <ProductSection
+              product={product}
+              isLoading={isProductLoading}
+              isError={isProductError}
+            />
+            <div className="vertical-separator" />
+            <ApplicationForm
+              initialData={data.applicants?.[0]}
+              onSubmit={handleSubmit}
+              isLoading={updateMutation.isPending}
+            />
+          </>
+        )}
       </div>
     </>
   );

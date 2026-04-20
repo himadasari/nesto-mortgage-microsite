@@ -5,7 +5,7 @@ import { useUpdateApplication } from '../hooks/useUpdateApplication';
 import { useParams } from 'react-router-dom';
 import ApplicationForm from '../components/ApplicationForm/ApplicationForm';
 import { useProducts } from '../hooks/useProducts';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { showError, showInfo, showSuccess } from '../utils/toast';
 import { isApplicantComplete } from '../utils/utils';
 import { translations } from '../i18/translations';
@@ -42,6 +42,21 @@ export const ApplicationPage = () => {
     const { data: products, isLoading: isProductLoading, isError: isProductError } = useProducts();
     const { language } = useLanguage();
     const t = translations[language];
+
+    const hasShownToast = useRef(false);
+
+    useEffect(() => {
+        const applicant = data?.applicants?.[0];
+
+        if (
+            applicant &&
+            !isApplicantComplete(applicant) &&
+            !hasShownToast.current
+        ) {
+            showInfo("New application created. Please fill in details.");
+            hasShownToast.current = true;
+        }
+    }, [data]);
 
   const handleSubmit = (applicant: Applicant) => {
     updateMutation.mutate(

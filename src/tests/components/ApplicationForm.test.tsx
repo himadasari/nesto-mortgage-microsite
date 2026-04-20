@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import type { Applicant } from "../../types";
-import ApplicationForm from "../../components/ApplicationForm";
+import ApplicationForm from "../../components/ApplicationForm/ApplicationForm";
 
 const initialData: Applicant = {
   firstName: "Hima",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Applicant } from "../types";
+import type { Applicant } from "../../types";
 
 const ApplicationForm = ({
   initialData,

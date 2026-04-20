@@ -1,9 +1,9 @@
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/ProductCard/ProductCard';
 import type { Product, Applicant } from '../types';
 import { useApplication } from '../hooks/useApplication';
 import { useUpdateApplication } from '../hooks/useUpdateApplication';
 import { useParams } from 'react-router-dom';
-import ApplicationForm from '../components/ApplicationForm';
+import ApplicationForm from '../components/ApplicationForm/ApplicationForm';
 import { useProducts } from '../hooks/useProducts';
 import { useMemo } from 'react';
 import { showError, showInfo, showSuccess } from '../utils/toast';

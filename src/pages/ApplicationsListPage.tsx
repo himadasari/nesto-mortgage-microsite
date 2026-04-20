@@ -31,10 +31,10 @@ const ApplicationsListPage = () => {
 
   const handleSort = (column: 'name' | 'email') => {
     if (sortBy === column) {
-      // same column → toggle direction
+      // same column, toggle direction
       setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
     } else {
-      // new column → set column + reset direction
+      // new column, set column + reset direction
       setSortBy(column);
       setSortOrder('asc');
     }

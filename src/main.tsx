@@ -1,8 +1,8 @@
-import { createRoot } from 'react-dom/client'
-import './styles/index.scss'
-import App from './App.tsx'
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { LanguageProvider } from "./context/LanguageProvider";
+import { createRoot } from 'react-dom/client';
+import './styles/index.scss';
+import App from './App.tsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LanguageProvider } from './context/LanguageProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,5 +18,5 @@ createRoot(document.getElementById('root')!).render(
     <LanguageProvider>
       <App />
     </LanguageProvider>
-  </QueryClientProvider>
-)
+  </QueryClientProvider>,
+);

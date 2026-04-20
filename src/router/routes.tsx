@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductsPage from "../pages/ProductsPage";
-import { ApplicationPage } from "../pages/ApplicationPage";
-import ApplicationsListPage from "../pages/ApplicationsListPage";
-import { Layout } from "../components/Layout";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProductsPage from '../pages/ProductsPage';
+import { ApplicationPage } from '../pages/ApplicationPage';
+import ApplicationsListPage from '../pages/ApplicationsListPage';
+import { Layout } from '../components/Layout';
 
 export default function AppRoutes() {
   return (

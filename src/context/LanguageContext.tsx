@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import type { Language } from "../types";
+import { createContext } from 'react';
+import type { Language } from '../types';
 
 export type LanguageContextType = {
   language: Language;
@@ -7,6 +7,6 @@ export type LanguageContextType = {
 };
 
 export const LanguageContext = createContext<LanguageContextType>({
-  language: "en",
+  language: 'en',
   setLanguage: () => {},
 });

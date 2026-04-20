@@ -1,4 +1,5 @@
 # nesto-mortgage-microsite
+
 A React single-page application that allows users to compare mortgage products, create applications, and manage their information. The app emphasizes scalable architecture, clear separation of concerns, and a user-friendly, responsive interface.
 
 ## 🚀 Setup

@@ -14,7 +14,7 @@ import { useLanguage } from '../hooks/useLanguage';
 const ProductSection = ({
   product,
   isLoading,
-  isError
+  isError,
 }: {
   product?: Product;
   isLoading: boolean;
@@ -35,72 +35,85 @@ const ProductSection = ({
 };
 
 export const ApplicationPage = () => {
-    const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
 
-    const { data, isLoading, isError } = useApplication(id!);
-    const updateMutation = useUpdateApplication();
-    const { data: products, isLoading: isProductLoading, isError: isProductError } = useProducts();
-    const { language } = useLanguage();
-    const t = translations[language];
+  const { data, isLoading, isError } = useApplication(id!);
+  const updateMutation = useUpdateApplication();
+  const {
+    data: products,
+    isLoading: isProductLoading,
+    isError: isProductError,
+  } = useProducts();
+  const { language } = useLanguage();
+  const t = translations[language];
 
-    const hasShownToast = useRef(false);
+  const hasShownToast = useRef(false);
 
-    useEffect(() => {
-        const applicant = data?.applicants?.[0];
+  useEffect(() => {
+    const applicant = data?.applicants?.[0];
 
-        if (
-            applicant &&
-            !isApplicantComplete(applicant) &&
-            !hasShownToast.current
-        ) {
-            showInfo("New application created. Please fill in details.");
-            hasShownToast.current = true;
-        }
-    }, [data]);
+    if (
+      applicant &&
+      !isApplicantComplete(applicant) &&
+      !hasShownToast.current
+    ) {
+      showInfo('New application created. Please fill in details.');
+      hasShownToast.current = true;
+    }
+  }, [data]);
 
   const handleSubmit = (applicant: Applicant) => {
     updateMutation.mutate(
-        {
-            id: id!,
-            data: {
-                applicants: [applicant],
-            },
+      {
+        id: id!,
+        data: {
+          applicants: [applicant],
         },
-        {
-            onSuccess: () => {
-                if (isApplicantComplete(applicant)) {
-                showSuccess("Application Saved");
-                } else {
-                showInfo("Application saved with incomplete details.");
-                }
-            },
-            onError: () => {
-                showError("Failed to save application");
-            },
-        }
+      },
+      {
+        onSuccess: () => {
+          if (isApplicantComplete(applicant)) {
+            showSuccess('Application Saved');
+          } else {
+            showInfo('Application saved with incomplete details.');
+          }
+        },
+        onError: () => {
+          showError('Failed to save application');
+        },
+      },
     );
   };
 
-    const product = useMemo(() => products?.find((p) => p.id === data?.productId), [products, data?.productId]);
+  const product = useMemo(
+    () => products?.find((p) => p.id === data?.productId),
+    [products, data?.productId],
+  );
 
-    if (!id) {
-        return <div>Invalid application</div>;
-    }
+  if (!id) {
+    return <div>Invalid application</div>;
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Something went wrong!</div>;
   if (!data) return <div>Application not found</div>;
 
-    return (<>
-       <h1 className="page-header">{t.applicationsDetails}</h1>
-        <div className="application-page">
-            <ProductSection product={product} isLoading={isProductLoading} isError={isProductError}/>
-            <div className="vertical-separator" />
-            <ApplicationForm
-                initialData={data.applicants?.[0]}
-                onSubmit={handleSubmit}
-                isLoading={updateMutation.isPending}
-            />
-        </div>
-    </>);
+  return (
+    <>
+      <h1 className="page-header">{t.applicationsDetails}</h1>
+      <div className="application-page">
+        <ProductSection
+          product={product}
+          isLoading={isProductLoading}
+          isError={isProductError}
+        />
+        <div className="vertical-separator" />
+        <ApplicationForm
+          initialData={data.applicants?.[0]}
+          onSubmit={handleSubmit}
+          isLoading={updateMutation.isPending}
+        />
+      </div>
+    </>
+  );
 };

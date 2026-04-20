@@ -23,8 +23,8 @@
     width: calc(50% - 16px); // 2 per row
   }
 
-    // large screens
-    @media (min-width: 1024px) {
-        width: calc(25% - 16px); // 4 per row
-    }
+  // large screens
+  @media (min-width: 1024px) {
+    width: calc(25% - 16px); // 4 per row
+  }
 }

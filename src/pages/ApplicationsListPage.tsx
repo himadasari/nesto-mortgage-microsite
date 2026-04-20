@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApplications } from '../hooks/useApplications';
 import { translations } from '../i18/translations';
 import { useLanguage } from '../hooks/useLanguage';
+import PageState from '../components/PageState';
 
 const ApplicationsListPage = () => {
   const { data, isLoading, isError } = useApplications();
@@ -88,80 +89,92 @@ const ApplicationsListPage = () => {
     });
   }, [validApplications, searchString, sortBy, sortOrder]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error occurred while fetching applications.</div>;
-  }
-
-  if (!validApplications?.length) {
-    return <div>No applications with complete details yet</div>;
-  }
-
-  if (!visibleApplications.length) {
-    return <div>No results found</div>;
-  }
-
   return (
-    <div className="applications">
+    <>
       <h1>{t.applications}</h1>
-      <input
-        type="text"
-        placeholder={t.searchPlaceholder}
-        value={searchString}
-        onChange={(e) => setSearchString(e.target.value)}
-        className="applications__search"
-      />
-      <div className="applications__table-container">
-        <table className="applications__table">
-          <thead className="applications__table-header">
-            <tr className="applications__row applications__row--head">
-              <th
-                className="applications__cell"
-                onClick={() => handleSort('name')}
-              >
-                Name {sortBy === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
-              </th>
-              <th
-                className="applications__cell"
-                onClick={() => handleSort('email')}
-              >
-                Email {sortBy === 'email' && (sortOrder === 'asc' ? '↑' : '↓')}
-              </th>
-              <th className="applications__cell">Phone Number</th>
-              <th className="applications__cell">Action</th>
-            </tr>
-          </thead>
-          <tbody className="applications__table-body">
-            {visibleApplications.map((application) => {
-              const applicant = application.applicants?.[0];
-              if (!applicant) return null;
-
-              return (
-                <tr key={application.id} className="applications__row">
-                  <td className="applications__cell">
-                    {applicant.firstName} {applicant.lastName}
-                  </td>
-                  <td className="applications__cell">{applicant.email}</td>
-                  <td className="applications__cell">{applicant.phone}</td>
-                  <td className="applications__cell">
-                    <button
-                      type="button"
-                      className="applications__button"
-                      onClick={() => handleEdit(application.id)}
+      <div className="applications">
+        {isLoading && <PageState message="Loading applications..." />}
+        {isError && (
+          <PageState
+            message="Error occurred while fetching applications."
+            type="error"
+          />
+        )}
+        {!isLoading && !isError && !validApplications?.length && (
+          <PageState message="No applications with complete details yet" />
+        )}
+        {!isLoading &&
+          !isError &&
+          validApplications?.length > 0 &&
+          !visibleApplications.length && (
+            <PageState message="No results found" />
+          )}
+        {!isLoading && !isError && visibleApplications.length > 0 && (
+          <>
+            <input
+              type="text"
+              placeholder={t.searchPlaceholder}
+              value={searchString}
+              onChange={(e) => setSearchString(e.target.value)}
+              className="applications__search"
+            />
+            <div className="applications__table-container">
+              <table className="applications__table">
+                <thead className="applications__table-header">
+                  <tr className="applications__row applications__row--head">
+                    <th
+                      className="applications__cell"
+                      onClick={() => handleSort('name')}
                     >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                      Name{' '}
+                      {sortBy === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th
+                      className="applications__cell"
+                      onClick={() => handleSort('email')}
+                    >
+                      Email{' '}
+                      {sortBy === 'email' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th className="applications__cell">Phone Number</th>
+                    <th className="applications__cell">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="applications__table-body">
+                  {visibleApplications.map((application) => {
+                    const applicant = application.applicants?.[0];
+                    if (!applicant) return null;
+
+                    return (
+                      <tr key={application.id} className="applications__row">
+                        <td className="applications__cell">
+                          {applicant.firstName} {applicant.lastName}
+                        </td>
+                        <td className="applications__cell">
+                          {applicant.email}
+                        </td>
+                        <td className="applications__cell">
+                          {applicant.phone}
+                        </td>
+                        <td className="applications__cell">
+                          <button
+                            type="button"
+                            className="applications__button"
+                            onClick={() => handleEdit(application.id)}
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

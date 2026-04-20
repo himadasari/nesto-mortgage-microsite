@@ -55,3 +55,8 @@ export type CreateApplication = {
 };
 
 export type Language = 'en' | 'fr';
+
+export type PageStateProps = {
+  type?: 'default' | 'error';
+  message: string;
+};

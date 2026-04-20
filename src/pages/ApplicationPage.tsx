@@ -10,6 +10,7 @@ import { showError, showInfo, showSuccess } from '../utils/toast';
 import { isApplicantComplete } from '../utils/utils';
 import { translations } from '../i18/translations';
 import { useLanguage } from '../hooks/useLanguage';
+import PageState from '../components/PageState';
 
 const ProductSection = ({
   product,
@@ -94,14 +95,15 @@ export const ApplicationPage = () => {
     return <div>Invalid application</div>;
   }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Something went wrong!</div>;
-  if (!data) return <div>Application not found</div>;
-
   return (
     <>
       <h1 className="page-header">{t.applicationsDetails}</h1>
       <div className="application-page">
+        {isLoading && <PageState message="Loading applications..." />}
+        {isError && (
+          <PageState message="Failed to load application" type="error" />
+        )}
+        {!data && <PageState message="Application not found" />}
         <ProductSection
           product={product}
           isLoading={isProductLoading}

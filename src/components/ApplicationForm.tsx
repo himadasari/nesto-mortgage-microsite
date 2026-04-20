@@ -56,7 +56,11 @@ const ApplicationForm = ({
                 onChange={(e) => handleChange("phone", e.target.value)}
             />
         </div>
-        <button disabled={isLoading}>
+        <button
+            className="application-form__submit-button"
+            type="submit"
+            disabled={isLoading}
+        >
             {isLoading ? "Saving..." : "Save Application"}
         </button>
     </form>

@@ -53,3 +53,5 @@ export type Application = {
 export type CreateApplication = {
   productId: number;
 };
+
+export type Language = "en" | "fr";

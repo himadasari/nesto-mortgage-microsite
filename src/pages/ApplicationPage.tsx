@@ -8,6 +8,8 @@ import { useProducts } from '../hooks/useProducts';
 import { useMemo } from 'react';
 import { showError, showInfo, showSuccess } from '../utils/toast';
 import { isApplicantComplete } from '../utils/utils';
+import { translations } from '../i18/translations';
+import { useLanguage } from '../hooks/useLanguage';
 
 const ProductSection = ({
   product,
@@ -35,9 +37,11 @@ const ProductSection = ({
 export const ApplicationPage = () => {
     const { id } = useParams<{ id: string }>();
 
-  const { data, isLoading, isError } = useApplication(id!);
-  const updateMutation = useUpdateApplication();
-  const { data: products, isLoading: isProductLoading, isError: isProductError } = useProducts();
+    const { data, isLoading, isError } = useApplication(id!);
+    const updateMutation = useUpdateApplication();
+    const { data: products, isLoading: isProductLoading, isError: isProductError } = useProducts();
+    const { language } = useLanguage();
+    const t = translations[language];
 
   const handleSubmit = (applicant: Applicant) => {
     updateMutation.mutate(
@@ -73,7 +77,7 @@ export const ApplicationPage = () => {
   if (!data) return <div>Application not found</div>;
 
     return (<>
-       <h1 className="page-header">Application Details</h1>
+       <h1 className="page-header">{t.applicationsDetails}</h1>
         <div className="application-page">
             <ProductSection product={product} isLoading={isProductLoading} isError={isProductError}/>
             <div className="vertical-separator" />

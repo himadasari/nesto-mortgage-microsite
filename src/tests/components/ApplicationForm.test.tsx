@@ -4,11 +4,11 @@ import type { Applicant } from "../../types";
 import ApplicationForm from "../../components/ApplicationForm";
 
 const initialData: Applicant = {
-    firstName: "Ava",
-    lastName: "Thompson",
-    email: "ava.thompson@client.ca",
-    phone: "4165550198",
-  };
+  firstName: "Hima",
+  lastName: "Dasari",
+  email: "hima.dasari@client.ca",
+  phone: "1234567890",
+};
 
 describe("ApplicationForm", () => {
   it("renders initial applicant details", () => {
@@ -20,12 +20,12 @@ describe("ApplicationForm", () => {
       />
     );
 
-    expect(screen.getByDisplayValue("Ava")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("Thompson")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("Hima")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("Dasari")).toBeInTheDocument();
     expect(
-      screen.getByDisplayValue("ava.thompson@client.ca")
+      screen.getByDisplayValue("hima.dasari@client.ca")
     ).toBeInTheDocument();
-    expect(screen.getByDisplayValue("4165550198")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("1234567890")).toBeInTheDocument();
   });
 
   it("updates applicant information on input change", () => {
@@ -38,14 +38,14 @@ describe("ApplicationForm", () => {
     );
 
     const emailInput = screen.getByDisplayValue(
-      "ava.thompson@client.ca"
+      "hima.dasari@client.ca"
     );
 
     fireEvent.change(emailInput, {
-      target: { value: "ava.updated@client.ca" },
+      target: { value: "hima.updated@client.ca" },
     });
 
-    expect(emailInput).toHaveValue("ava.updated@client.ca");
+    expect(emailInput).toHaveValue("hima.updated@client.ca");
   });
 
   it("submits updated applicant data", () => {
@@ -59,10 +59,10 @@ describe("ApplicationForm", () => {
       />
     );
 
-    const phoneInput = screen.getByDisplayValue("4165550198");
+    const phoneInput = screen.getByDisplayValue("1234567890");
 
     fireEvent.change(phoneInput, {
-      target: { value: "6475550123" },
+      target: { value: "1234567891" },
     });
 
     const button = screen.getByRole("button");
@@ -71,7 +71,7 @@ describe("ApplicationForm", () => {
 
     expect(handleSubmit).toHaveBeenCalledWith({
       ...initialData,
-      phone: "6475550123",
+      phone: "1234567891",
     });
   });
 

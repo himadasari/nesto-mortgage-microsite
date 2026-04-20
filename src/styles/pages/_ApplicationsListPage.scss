@@ -4,6 +4,19 @@
   justify-content: center;
   padding: 40px 20px;
 
+  &__search {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 0 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-size: 14px;
+  }
+
   &__table-container {
     width: 100%;
     max-width: 1000px;
@@ -23,6 +36,14 @@
 
     &:hover {
       background-color: #f5f5f5;
+    }
+
+    th {
+        cursor: pointer;
+    }
+
+    th:hover {
+        background-color: #f5f5f5;
     }
 
     &--head {

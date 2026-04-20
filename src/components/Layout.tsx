@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { useLanguage } from "../hooks/useLanguage";
 
 export function Layout() {
+    const { language, setLanguage } = useLanguage();
   return (
     <div className="app">
       <header className="app-header">
@@ -17,6 +19,14 @@ export function Layout() {
                 Applications
             </NavLink>
         </nav>
+        <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as "en" | "fr")}
+            aria-label="Select language"
+        >
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+        </select>
       </header>
 
       <main className="app__content">
